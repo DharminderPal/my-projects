@@ -2,7 +2,8 @@
   display: flex;
   margin: 10px;
   margin-top: 10%;
-   word-break : normal;       
+   word-break : normal;   
+   /* position: fixed;     */
 }
 
 /* Align bot to the left */
