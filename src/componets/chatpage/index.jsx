@@ -2,15 +2,7 @@ import logo from "./logo3.png";
 import     "../chatpage/chatheader.css"
 
 const chatheader =()=>{
-
-
-
-
-
-
-
-
-    
+ 
     return(
 <header className="chat-header">
 

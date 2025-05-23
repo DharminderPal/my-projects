@@ -1,0 +1,7 @@
+.menu{
+background-color: orange;
+display: flex;
+flex-direction: column;
+margin-top: 6%;
+scroll-behavior: smooth;
+}

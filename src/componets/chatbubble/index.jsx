@@ -15,7 +15,9 @@ const ChatBubble = ({ msg }) => {
 };
 
 export default ChatBubble;
+
 /*
+
 what is use effect *
 use effect is a react component that can be use to manipulation the " dom " component .which can be used for less time   
 for example used like api ,timer, notification or other effects
