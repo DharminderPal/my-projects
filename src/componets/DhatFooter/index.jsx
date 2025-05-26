@@ -46,26 +46,48 @@
 
 import { useRef } from "react";
 import "./footer.css"
+import aichat from "../../ai/service/chat";
 
-const DhatFooter = ({ setMessage }) => {  // Changed to camelCase to match parent
+const DhatFooter = ({ setMessage }) => {  
     const refinput = useRef();
 
-    const onsend = (e) => {
-        const value = refinput.current.value;
-        // if (!value.trim()) return;  // Don't send empty messages
-        
-        setMessage((prevMessages) => [
-            ...prevMessages,
-            { 
-                id: Date.now(),  // Fixed: now a function call
-                message: value,  // Fixed: direct string instead of {value}
-                role: "user", 
-                created_at: Date.now() 
-            }
-        ]);
-        
-        refinput.current.value = "";  // Fixed variable name
-    };
+   const onsend = async (e) => {
+
+    const value = refinput.current.value;
+
+
+    const userId = crypto.randomUUID();  
+    const botId = crypto.randomUUID();   
+
+
+    setMessage((prevMessages) => [
+        ...prevMessages,
+        { 
+            id: userId,
+            message: value,
+            role: "user", 
+            created_at: Date.now() 
+        }
+    ]);
+
+    const botmsg = await aichat(value);  
+
+    setMessage((prevMessages) => [
+        ...prevMessages,
+        {   
+            id: botId,
+            message: botmsg, 
+            role: "bot", 
+            created_at: Date.now() 
+        }
+    ]);
+
+    refinput.current.value = "";
+};
+
+
+
+
 
     return (
         <div className="chatfooter">
@@ -76,6 +98,12 @@ const DhatFooter = ({ setMessage }) => {  // Changed to camelCase to match paren
             />
             <button onClick={onsend} className="btn1">Send ➤</button>
         </div>
+
+
+
+
+
+
     );
 };
 
