@@ -1,5 +1,5 @@
 import "./chat.css"
-
+import Markdown from "react-markdown";
 const ChatBubble = ({ msg }) => {
   const { message, role } = msg;
   const isBot = role === "bot";
@@ -8,11 +8,17 @@ const ChatBubble = ({ msg }) => {
     <div className={`chat-bubble-container ${isBot ? "left" : "right"}`}>
       <div className="chat-bubble">
         <p className="sender">{isBot ? "Bot" : "Me"}</p>
-        <p className="message">{message}</p>
+        <p className="message">
+
+<Markdown>{message}</Markdown></p>
       </div>
+
+      
+          
+        
     </div>
   );
-};
+};  
 
 export default ChatBubble;
 

@@ -52,30 +52,33 @@ const DhatFooter = ({ setMessage }) => {
     const refinput = useRef();
 
    const onsend = async (e) => {
-
     const value = refinput.current.value;
-
-
-    const userId = crypto.randomUUID();  
-    const botId = crypto.randomUUID();   
-
-
     setMessage((prevMessages) => [
         ...prevMessages,
-        { 
-            id: userId,
+        {   
+            id: Date.now(),
             message: value,
             role: "user", 
+            created_at: Date.now()
+
+           
+        },
+        {
+              id: Date.now(),
+            message: "Thinking...",
+            isThinking:true,
+            role: "bot", 
             created_at: Date.now() 
         }
     ]);
 
     const botmsg = await aichat(value);  
-
+    
+    
     setMessage((prevMessages) => [
         ...prevMessages,
         {   
-            id: botId,
+            id: Date.now(),
             message: botmsg, 
             role: "bot", 
             created_at: Date.now() 
@@ -106,6 +109,7 @@ const DhatFooter = ({ setMessage }) => {
 
     );
 };
+
 
 export default DhatFooter;
 

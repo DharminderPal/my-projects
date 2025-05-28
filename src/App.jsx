@@ -41,6 +41,7 @@ import { useState } from 'react'
 import Chatpage from './componets/chatpage'
 import DhatFooter from './componets/DhatFooter'
 import Chatbox from './componets/chatbox'
+import ErrorBoundry from './componets/ErrorBoundary'
 import MenuPage from './componets/pages/Menupage'
 
 const App = () => {
@@ -60,9 +61,15 @@ const App = () => {
   return (
     <>
       {/* <MenuPage/> */}
+    <ErrorBoundry>
+
       <Chatbox mesg={messages} />  {/* Pass messages to Chatbox */}
+      
       <Chatpage/>
       <DhatFooter setMessage={setm}/>
+      
+      
+      </ErrorBoundry> 
     </>
   )
 }
