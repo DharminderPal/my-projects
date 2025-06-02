@@ -1,13 +1,5 @@
 
 
-
-
-
-
-
-
-
-
 import { genAI } from "..";
 
 

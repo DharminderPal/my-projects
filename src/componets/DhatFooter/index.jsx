@@ -43,42 +43,39 @@
 
 
 // export default DhatFooter;
-
 import { useRef } from "react";
 import "./footer.css"
 import aichat from "../../ai/service/chat";
-
+import Markdown from "react-markdown";
+// import Chatbox from "../chatbox";
 const DhatFooter = ({ setMessage }) => {  
     const refinput = useRef();
 
    const onsend = async (e) => {
+
     const value = refinput.current.value;
+
+
+    const userId = crypto.randomUUID();  
+    const botId = crypto.randomUUID();   
+
+
     setMessage((prevMessages) => [
         ...prevMessages,
-        {   
-            id: Date.now(),
+        { 
+            id: userId,
             message: value,
             role: "user", 
-            created_at: Date.now()
-
-           
-        },
-        {
-              id: Date.now(),
-            message: "Thinking...",
-            isThinking:true,
-            role: "bot", 
             created_at: Date.now() 
         }
     ]);
 
     const botmsg = await aichat(value);  
-    
-    
+
     setMessage((prevMessages) => [
         ...prevMessages,
         {   
-            id: Date.now(),
+            id: botId,
             message: botmsg, 
             role: "bot", 
             created_at: Date.now() 
@@ -88,10 +85,6 @@ const DhatFooter = ({ setMessage }) => {
     refinput.current.value = "";
 };
 
-
-
-
-
     return (
         <div className="chatfooter">
             <input 
@@ -100,16 +93,10 @@ const DhatFooter = ({ setMessage }) => {
                 placeholder="write here..." 
             />
             <button onClick={onsend} className="btn1">Send ➤</button>
+            {/* <Chatbox mesg={messages} />  */}
         </div>
-
-
-
-
-
-
     );
 };
-
 
 export default DhatFooter;
 

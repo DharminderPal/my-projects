@@ -26,24 +26,17 @@
 // };
 
 // export default ChatBox;
-
-
-
-
+import Markdown from "react-markdown";
 import { useState } from "react";
 import "./chatbox1.css";
 import Chatbubble from "../chatbubble";
-
-
-
-
-
 const ChatBox = ({ mesg }) => { 
   return (
     <div className="chatbox">
       {mesg.map((msg) => (
         <Chatbubble key={msg.id} msg={msg} />
       ))}
+      <Markdown>{mesg.message}</Markdown>
     </div>
   );
 };

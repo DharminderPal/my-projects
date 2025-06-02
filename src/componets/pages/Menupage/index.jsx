@@ -3,10 +3,11 @@ import getmeals from "../../service/menuService/Meals";
 import Notify from "../../notification";
 import "../Menupage/menu.css";
 import Banner from "../../banner";
-
+import { useNavigate} from "react-router";
+import Header from "../../header";
 
 const MenuPage = () => {
-
+ const navigate = useNavigate();
   const [status, setstatus] = useState("loading");
   const [meals, setmeals] = useState([]);
 // ******************************************************************************
@@ -58,12 +59,12 @@ const melaskoformat = useMemo(()=>{
   hmara coed 100 line ka ho yani function hmara 100 line ka ho  
   
   */ 
-  const fetchmeals =  async () => {
-    try {
-      const data = await getmeals()
-      if (data) {
-        setmeals(data)
-        // console.log(data);/*data is coming */
+ const fetchmeals =  async () => {
+   try {
+     const data = await getmeals()
+     if (data) {
+       setmeals(data)
+       // console.log(data);/*data is coming */
       }
       setstatus("done");
     }
@@ -72,39 +73,48 @@ const melaskoformat = useMemo(()=>{
     }
   }
   
+  
+  
   // *****************************************************
   useEffect(() => {
     fetchmeals();
   }, []);
   const onclosenoti =()=>{
-     setnotification('')
+    setnotification('')
   }
-
-useEffect(()=>{
-  setnotification(status);
-},[status])
-
-
-useEffect(()=>{
-  setTimeout(()=>{
-onclosenoti()
-  },2500)
-},[])
-// *********************************************************
-  return (
-    <div className="menu">
+  
+  useEffect(()=>{
+    setnotification(status);
+  },[status])
+  
+  
+  useEffect(()=>{
+    setTimeout(()=>{
+        onclosenoti()
+      },2500)
+    },[])
+    // *********************************************************
+    const onchat = ()=>{
+      navigate("/chat");
+    }
+    
+    return (
+      <div className="menu">
+        <Header/>
       <h1>Recipes Corner</h1>
       {isloading && <h2>Loading....</h2>}
       {iserror && <h2>Errors_data....</h2>}
       {hasmeals && melaskoformat.map((item) => (<div key={item.idMeal}><p>{item.title || item.title}</p>
+
         </div>
       ))} 
       {nomeals && <h2>No_meals</h2>}
+      <button  onClick={onchat}>Take to Support team </button>
 
       {  shownotifiation && (
        <Notify message={shownotifiation}close_notifi={onclosenoti}  />
      )}
-<Banner/>
+{/* <Banner/> */}
 
 
     </div>

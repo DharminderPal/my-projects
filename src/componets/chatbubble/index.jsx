@@ -8,17 +8,16 @@ const ChatBubble = ({ msg }) => {
     <div className={`chat-bubble-container ${isBot ? "left" : "right"}`}>
       <div className="chat-bubble">
         <p className="sender">{isBot ? "Bot" : "Me"}</p>
-        <p className="message">
+        {/* <p className="message"> markdown{message}</p> */}
+        <div className="message" >
+        <Markdown>{message}</Markdown>
 
-<Markdown>{message}</Markdown></p>
+        </div>
       </div>
-
-      
-          
-        
+   
     </div>
   );
-};  
+};
 
 export default ChatBubble;
 
